@@ -11,7 +11,7 @@ fn main() {
     println!("Available t-values:");
     let mut sorted_keys: Vec<_> = protoboards.keys().copied().collect();
     sorted_keys.sort();
-    for t in sorted_keys {
+    for t in &sorted_keys {
         println!("t = {}", t);
     }
 
@@ -20,7 +20,21 @@ fn main() {
 
     let boards = protoboards.get(&t).expect("Invalid t selected");
 
-    println!("Available global IDs for t = {}: {} boards", t, boards.len());
+    // Calculate the starting global ID
+    let mut start_id = 1;
+    for key in sorted_keys.iter().filter(|&&key| key < t) {
+        if let Some(prev_boards) = protoboards.get(key) {
+            start_id += prev_boards.len();
+        }
+    }
+    let end_id = start_id + boards.len() - 1;
+
+    println!(
+        "Valid global IDs for t = {}: [{}..={}] ({} boards)",
+        t, start_id, end_id, boards.len()
+    );
+
+    // println!("Available global IDs for t = {}: {} boards", t, boards.len());
     println!("Enter global ID:");
     let global_id: usize = read_input().trim().parse().expect("Invalid global ID");
 
