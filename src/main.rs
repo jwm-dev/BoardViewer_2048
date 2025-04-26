@@ -107,6 +107,10 @@ fn count_filled(board: &Vec<Vec<char>>) -> usize {
 }
 
 fn parse_base11(s: &str) -> Vec<u32> {
+    if s.chars().filter(|&c| c == 'B').count() > 1 {
+        panic!("Invalid base-11 ID: more than one 'B'");
+    }
+
     s.chars().map(|c| match c {
         '1'..='9' => c.to_digit(11).unwrap(),
         'A' => 10,
