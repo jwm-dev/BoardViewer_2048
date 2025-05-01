@@ -11,5 +11,6 @@ This can be done using the companion project:
 git clone https://github.com/jwm-dev/ProtoboardEnum_2048
 cd ProtoboardEnum_2048
 cargo run --release
+```
 
 # Then move or link it into BoardViewer_2048's working directory
