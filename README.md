@@ -13,4 +13,4 @@ cd ProtoboardEnum_2048
 cargo run --release
 ```
 
-# Then move or link it into BoardViewer_2048's working directory
+**Then move or link it into BoardViewer_2048's working directory**
